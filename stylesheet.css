@@ -13,9 +13,9 @@ body{
     padding-top:20px; /*要素内の上側余白*/
     padding-bottom:20px; /*要素内の下側余白*/
     margin-top:0; /*要素外の上側余白*/
+}
 
 /*タイトル背景色スタイル*/
-}
 .top{
     background-color: cadetblue;/*背景の色を指定*/
     width: 100%;/*幅を画面いっぱいに広げる*/
