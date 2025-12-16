@@ -1,17 +1,17 @@
 /*ウェブサイト全体のスタイル設定*/
  html, body {
-        height: 100%;/*ウェブサイトを縦いっぱいに表示*/
+        height: 100%;/*ウェブサイトを端まで表示*/
         margin: 0;/*ウェブサイトを端まで表示*/
-        padding: 0;
-	 
+        padding: 0;/*ウェブサイトを端まで表示*/
+	    background-color: cadetblue;/*地図より後ろを青色に*/
       }
 
 
 /*タイトル文字スタイル*/
 .title{
-    color:white; /*テキストの文字色*/
-    font-size: 24px;/*テキストの大きさ*/
-    text-align: center;/*テキストの中央寄せ*/
+    color:white; /*文字色*/
+    font-size: 24px;/*テキストサイズ*/
+    text-align: center;/*中央寄せ*/
     padding-top:20px; /*要素内の上側余白*/
     padding-bottom:20px; /*要素内の下側余白*/
     margin:0; /*要素外の余白をすべて０に*/
@@ -23,26 +23,27 @@
     width: 100%;/*幅を画面いっぱいに広げる*/
     padding:0px;/*要素内の余白をすべて０に*/
     margin:0px;/*要素外の余白をすべて０に*/
-    box-shadow: 3px black;
+    box-shadow: 3px black;/*ドロップシャドウ　調整中*/
 }
 
-/*以下地図内スタイル*/
+/*地図内スタイル*/
 #map{
     width: 100%;/*地図を横幅いっぱいに*/
-    height: 100%;/*地図を縦幅いっぱいに*/
+    height: 90%;/*地図を縦幅いっぱいに*/
     margin-top:0px; /*要素外の上側余白を０に*/
     padding-top:0px; /*要素内の上側余白を０に*/
     z-index:0;/*地図のz座標を０に*/
 }
-    /*地図内のふきだし*/ 
-.popup-content{
+
+.popup-content{  /*地図内ふきだし*/ 
     background-color: aquamarine;
     
 }
 
+
 /*地図内スタイルここまで*/
 
-/*以下ポップアップ内スタイル*/
+/*ポップアップスタイルここから*/
 .open {
 	cursor:pointer; 
 }
