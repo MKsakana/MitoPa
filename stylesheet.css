@@ -9,11 +9,12 @@
 
 /*タイトル文字スタイル*/
 .title{
+	font-family: "HG丸ｺﾞｼｯｸM-PRO","Yu Gothic","Noto Sans";
     color:white; /*文字色*/
     font-size: 24px;/*テキストサイズ*/
     text-align: center;/*中央寄せ*/
-    padding-top:20px; /*要素内の上側余白*/
-    padding-bottom:20px; /*要素内の下側余白*/
+    padding-top: 25px; /*要素内の上側余白*/
+    padding-bottom:25px; /*要素内の下側余白*/
     margin:0; /*要素外の余白をすべて０に*/
 
 /*タイトル背景色スタイル*/
@@ -28,10 +29,10 @@
 
 /*地図内スタイル*/
 #map{
-    width: 100%;
-    height: 90%;
-    margin-top:0px; 
-    padding-top:0px; 
+    width: 100%;/*地図を横幅いっぱいに*/
+    height: 90%;/*地図を縦幅いっぱいに*/
+    margin-top:0px; /*要素外の上側余白を０に*/
+    padding-top:0px; /*要素内の上側余白を０に*/
     z-index:0;/*地図のz座標を０に*/
 }
 
