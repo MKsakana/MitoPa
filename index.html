@@ -1,19 +1,63 @@
 <!DOCTYPE html>
 <html lang="ja">
 <meta charset="utf-8">
-<html>
  <!--ヘッダーここから-->
  <head> 
     <title>Mitopa</title>
-    <link href="stylesheet.css" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="leaflet/leaflet.css">
  </head>
 <!--ヘッダーここまで-->
+
 <!--本体ここから-->
 <body>
     <!--タイトル-->
     <header class="top">  
         <h1 class="title">Mitoパーキングナビ</h1>
     </header>
+ <div id="map"></div>
+
+    <!--使い方ボタンここから-->
+    <button type="button" class="open" for="popup">使い方</button>
+
+    <label class="open" for="popup">使い方</label>
+    <input type="button" id="popup">
+    <!--使い方ボタンここまで-->
+
+    <!--ポップアップここから-->
+    <div class="overlay">
+        <div class="window">
+            <label class="close" for="popup">×</label>
+                <h2>使い方</h2>
+                <p>水戸駅近辺のコインパーキングを探せます。<br>
+                ​このサイトは茨城大学情報デザイン菅谷ゼミ生が開発したWebアプリです。​<br>
+                「目的地近くの駐車場を探したい！」「近くの駐車場はどこにあるのかな？」「初心者でも停めやすい駐車場はどこかな？」など様々なニーズに応えて検索することができます！
+                </p>
+                
+                <h3>Ｑ.ゆきちゃんって誰？</h3>
+                <p>私は茨城大学人文社会科学部菅谷ゼミの公式キャラクターだよ！ <br>菅谷ゼミではゼミ生がプロジェクト制作を行っていて、私もそのプロジェクトで生み出されたよ！</p>
+                
+                <h3>Ｑ.菅谷ゼミって何？</h3>
+                <p>菅谷ゼミは情報デザインを主分野とするゼミ生が、型にとらわれずに幅広い活動を行っているよ！</p>
+                
+                
+                <h3>Ｑ.どういうサイトなの？</h3>
+                <p>ドライバーの目線に立った情報（初心者向きか、駐車場台数など）を掲載しているよ！<br>
+                Googleマップに登録されていない駐車場も掲載しているよ。</p>
+
+                <h3>Ｑ.なんでこのサイトを作ったの？このサイトの目的は？</h3>
+                <p>地方創生を目指すプロジェクトの一環で、水戸市に訪れるドライバーが快適に駐車場を見つけることができるようにお手伝いしようと考えたんだ！</p>
+
+                <h3>Ｑ.このアプリは無料？</h3>
+                <p>完全無料だよ♫</p>
+        </div>
+    </div>
+    <!--ポップアップここまで--> 
+ 
+
+<!---Jsリンク-->
+ <script src="leaflet/leaflet.js"></script>
+ <script src="js/test.js"></script>
 
 </body>
 <!--本体ここまで-->
