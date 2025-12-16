@@ -1,4 +1,4 @@
- // 地図を作るよ
+ // 地図表示
 const map = L.map('map', {
   center: [36.3708, 140.4760],
   zoom: 17,
@@ -16,23 +16,23 @@ const map = L.map('map', {
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   noWrap: true,
   bounds: [
-    [36.25, 140.35],
+    [36.25, 140.35],// 水戸駅周辺を指定
     [36.45, 140.60]
   ]
 }).addTo(map);
 
 
-// 実際の実行
+// geojsonファイルの読み込み→関数呼び出し
 fetch('geo_test.geojson')
   .then(convertToJson)
   .then(processData);
 
-//JSONに変換
+//関数：GEOJSONをJSONに変換
 function convertToJson(res) {
   return res.json();
 }
 
-//JSONデータを処理
+//関数：JSONデータを処理
 function processData(data) {
   L.geoJSON(data, {
     onEachFeature: function(feature, layer) {
@@ -41,6 +41,7 @@ function processData(data) {
     });
 }
 
+//ピンをクリックで吹き出し表示
 layer.bindPopup(`
           <div class="popup-content">
             <h4>${props.名前}</h4>
