@@ -37,15 +37,15 @@ function processData(data) {
   L.geoJSON(data, {
     onEachFeature: function(feature, layer) {
       const props = feature.properties;
+      layer.bindPopup(`
+        <div class="popup-content">
+          <h4>${props.名前}</h4>
+          <p>初心者おすすめ: ${props.初心者おす ? props.初心者おす : ""}</p>
+          <p>ひとこと:${props.備考 ? props.備考 : ""}</p>
+        </div>
+      `);
     }
-    });
+  }).addTo(map); // マップに追加
 }
 
 //ピンをクリックで吹き出し表示
-layer.bindPopup(`
-          <div class="popup-content">
-            <h4>${props.名前}</h4>
-           <p>初心者おすすめ: ${props.初心者おす ? props.初心者おす[0] : ""}</p>
-
-          </div>
-        `);
