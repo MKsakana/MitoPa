@@ -27,7 +27,7 @@
     box-shadow: 3px black;/*ドロップシャドウ　調整中*/
 }
 
-/*地図内スタイル*/
+/*ここから地図内スタイル*/
 #map{
     width: 100%;/*地図を横幅いっぱいに*/
     height: 90%;/*地図を縦幅いっぱいに*/
@@ -35,21 +35,69 @@
     padding-top:0px; /*要素内の上側余白を０に*/
     z-index:0;/*地図のz座標を０に*/
 }
-
-.popup-content{  /*地図内ふきだし*/ 
-    background-color: aquamarine;
-    
+	/*ポップアップ吹き出しスタイル（leaflet.cssから一部コピペ→編集しています）*/
+		/*吹き出しの中身*/	
+.popup-content{
+	color:white
 }
+		/*吹き出しの下地*/	
+.leaflet-popup-content-wrapper {
+	padding: 1px;
+	text-align: left;
+	border-radius: 5px;
+	background-color:  cadetblue;
+	}
+		/*吹き出しの尖ってるところ*/	
+.leaflet-popup-tip {
+	width: 17px;
+	height: 17px;
+	padding: 1px;
 
+	margin: -10px auto 0;
+	pointer-events: auto;
 
+	-webkit-transform: rotate(45deg);
+	   -moz-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	        transform: rotate(45deg);
+	}
+		/*吹き出し全体の色指定*/
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+	background-color:cadetblue;
+	color: #333;
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+	}
+	/*吹き出しスタイルここまで*/
 /*地図内スタイルここまで*/
 
 /*ポップアップスタイルここから*/
+
+/* ポップアップ内のスクロール */
+.scroll{
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll
+}
+
+/* yuki１の大きさ指定 */
+.yuki1{
+  max-width: 20%;
+  height: auto;
+  float: left; /* 左に浮かせる */
+  margin-right: 15px; /* 文章とくっつきすぎないように隙間を作る */
+  margin-bottom: 10px;
+}
+
 .open {
 	cursor:pointer; 
 }
+#popup{
+	display: none;
+}
 .overlay {
-	display: visible;
+	display: none;
+	display: flex;
 }
 #popup:checked + .overlay {
 	display: block;
@@ -61,11 +109,12 @@
 	left: 0;
 }
 .window {
-	width: 90vw;
-	max-width: 380px;
-	height: 200px;
+	width: 80%;
+	max-width: 80%;
+	height: 80%;
 	background-color: white;
-	border-radius: 8px;
+	border-radius: 8px; /* 四角の角を丸くする */
+	padding: 10px;
 	justify-content: center;
 	align-items: center;
 	position: fixed;
@@ -73,7 +122,6 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-
 .close {
 	cursor:pointer;
 	position: absolute;
@@ -82,5 +130,52 @@
 	font-size: 20px;
 }
 
+/* 質問　アコーディオンメニュー　ここから */
+details {
+  margin-bottom: 20px;
+  border: solid 1px cadetblue;
+}
+
+summary {
+  position: relative;
+  padding: 10px 35px 10px 20px;
+  list-style: none; /* ▶を非表示 */
+  cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::before {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  width: 14px;
+  height: 0;
+  border-top: solid 2px cadetblue;
+  transform: translateY(-50%);
+  content: "";
+}
+
+summary::after {
+  position: absolute;
+  top: 50%;
+  right: 26px;
+  width: 0;
+  height: 14px;
+  border-right: solid 2px cadetblue;
+  transform: translateY(-50%);
+  content: "";
+}
+
+details[open] summary::after {
+  opacity: 0;
+}
+
+.details_content {
+  padding: 0 20px 10px;
+}
+/* 質問　アコーディオンメニュー　ここまで */
 
 /*ポップアップスタイルここまで*/
