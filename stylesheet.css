@@ -5,6 +5,10 @@
         padding: 0;/*ウェブサイトを端まで表示*/
 	    background-color: cadetblue;/*地図より後ろを青色に*/
       }
+h4{
+	text-align: center;
+	font-size:18px;
+}
 
 
 /*タイトル文字スタイル*/
@@ -38,7 +42,10 @@
 	/*ポップアップ吹き出しスタイル（leaflet.cssから一部コピペ→編集しています）*/
 		/*吹き出しの中身*/	
 .popup-content{
-	color:white
+	color:rgb(19, 76, 78)
+}
+.popup-content p{
+	font-size: 15px;
 }
 		/*吹き出しの下地*/	
 .leaflet-popup-content-wrapper {
@@ -64,9 +71,9 @@
 		/*吹き出し全体の色指定*/
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
-	background-color:cadetblue;
+	background-color:rgb(255, 255, 255);
 	color: #333;
-	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+	box-shadow: 0 0px 3px rgba(0,0,0,0.4);
 	}
 	/*吹き出しスタイルここまで*/
 /*地図内スタイルここまで*/
@@ -96,7 +103,6 @@
 	display: none;
 }
 .overlay {
-	display: none;
 	display: flex;
 }
 #popup:checked + .overlay {
