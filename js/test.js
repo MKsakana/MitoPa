@@ -40,8 +40,8 @@ function processData(data) {
       layer.bindPopup(`
         <div class="popup-content">
           <h4>${props.名前}</h4>
-          <p>初心者おすすめ: ${props.初心者おす ? props.初心者おす : ""}</p>
-          <p>ひとこと:${props.備考 ? props.備考 : ""}</p>
+          <p>初心者おすすめ度:<br> ${props.初心者おす ? props.初心者おす : ""}</p>
+          <p>ひとこと:<br>${props.備考 ? props.備考 : ""}</p>
         </div>
       `);
     }
