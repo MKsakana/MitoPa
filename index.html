@@ -11,13 +11,19 @@
 
 <!--本体-->
 <body>
-     <!--タイトル-->
+ <!--タイトル-->
     <header class="top">  
         <h1 class="title">Mitoパーキングナビ</h1>
     </header>
- <div id="map"></div>
-    <!--タイトルここまで-->
+ <!--タイトルここまで-->
+  
+    <div class="buttons">
+        <div id="locate-btn">現在地からさがす🔍</div><!--検索ボタン-->
+    </div>
 
+    <div id="map"></div>  <!--地図-->   
+    
+    
     <!--使い方ボタンここから-->
     <label class="open" for="popup">使い方</label>
     <input type="checkbox" id="popup">
@@ -58,7 +64,6 @@
         </div>
     </div>
     <!--ポップアップここまで--> 
- 
 
 <!--Js読み込み-->
  <script src="leaflet/leaflet.js"></script>
