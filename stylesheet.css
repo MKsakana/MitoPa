@@ -61,6 +61,16 @@ h4{
 			border-bottom: 3px solid rgb(19, 76, 78);
 			}
 		/*吹き出しの尖ってるところ*/	
+		.leaflet-popup-tip-container {
+		width: 40px;
+		height: 20px;
+		position: absolute;
+		left: 50%;
+		margin-top: -3.1px;
+		margin-left: -20px;
+		overflow: hidden;
+		pointer-events: none;
+		}
 		.leaflet-popup-tip {
 			width: 17px;
 			height: 17px;
@@ -82,6 +92,15 @@ h4{
 			background-color:rgb(255, 255, 255);
 			color: #333;
 			box-shadow: 0 0px 3px rgba(0,0,0,0.4);
+			}
+
+		/*吹き出し内の×ボタンを消去*/
+		.leaflet-container a.leaflet-popup-close-button {
+		display: none;
+			}
+		.leaflet-container a.leaflet-popup-close-button:hover,
+		.leaflet-container a.leaflet-popup-close-button:focus {
+		display: none;
 			}
 	/*吹き出しスタイルここまで*/
 
@@ -174,6 +193,7 @@ h4{
 	right: 8px;
 	font-size: 20px;
 }
+
 
 /* 質問　アコーディオンメニュー　ここから */
 details {
