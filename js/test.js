@@ -69,7 +69,7 @@ function addMarkers(dataToDisplay) {
 
 
 
-//-------------------------------------------ボタン操作
+//-------------------------------------------近くの駐車場検索
 
   //#locate-btnにクリックイベントを追加→イベント内に位置情報を取得するプログラムを入れる
   //ボタンを取得する
@@ -79,7 +79,7 @@ var btn = document.getElementById('locate-btn');
 btn.addEventListener('click', function() {
     // ボタンが押されたら、ブラウザに位置情報を聞く
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-});
+});//位置情報が取れたら→関数４　取れなかったら→関数5
 
 //関数４：位置情報がうまく取れた時の処理
 function successCallback(position) {
@@ -97,7 +97,7 @@ function successCallback(position) {
       var pIdo = feature.geometry.coordinates[1];
       var parkingPoint = L.latLng(pIdo,pKeido);
 
-      var distance = userPoint.distanceTo(parkingPoint);
+      var distance = userPoint.distanceTo(parkingPoint);//distanceTo:指定されたベクトル(それぞれの駐車場)からの距離を計算
       return distance <= 500;
     });
   var filteredData={
