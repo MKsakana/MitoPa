@@ -34,8 +34,8 @@ var parkingLayer = L.layerGroup().addTo(map);
 
   // geojsonファイルの読み込み→関数呼び出し
 fetch('geo_test.geojson')
-  .then(convertToJson)//　→関数１
-  .then(processData);//　→関数２
+  .then(convertToJson)//　→関数１へ
+  .then(processData);//　→関数２へ
 
 //関数１：GEOJSONをJSONに変換
 function convertToJson(res) {
@@ -43,26 +43,29 @@ function convertToJson(res) {
 }
 //関数２：Jsonを関数に保存して、次の関数へ渡す
 function processData(data) {
-    allParkingData = data; // データを変数に保存
+    allParkingData = data; //データを変数に保存
     addMarkers(data);   // 　→関数３
 }
-//関数３：ピンとポップアップの設定→表示
+//関数３：ピンと吹き出しの設定→表示
 function addMarkers(dataToDisplay) {
-    parkingLayer.clearLayers(); // 一旦シートを真っさらにする
+    parkingLayer.clearLayers(); //シートを真っさらにする
     L.geoJSON(dataToDisplay, {
       //駐車場情報を取得
        onEachFeature: function(feature, layer) {
       const props = feature.properties;
+
       //駐車場情報を使ってHTMLにポップアップを追加
       layer.bindPopup(`
         <div class="popup-content">
+        <img src="image/yuki1.png" class="PinPng">
           <h4>${props.名前}</h4>
           <p>初心者おすすめ度:<br> ${props.初心者おす ? props.初心者おす : ""}</p>
           <p>ひとこと:<br>${props.備考 ? props.備考 : ""}</p>
         </div>
       `);
     }
-    }).addTo(parkingLayer); // レイヤーにピンを追加
+    })
+    .addTo(parkingLayer); //用意していたレイヤーにピンを追加
 }
 
 //-------------------------------------------初期ピン表示ここまで
@@ -71,47 +74,119 @@ function addMarkers(dataToDisplay) {
 
 //-------------------------------------------近くの駐車場検索
 
-  //#locate-btnにクリックイベントを追加→イベント内に位置情報を取得するプログラムを入れる
-  //ボタンを取得する
+//--処理の流れのイメージ--
+// 現在地からさがすボタンをタップ
+// 現在地取得 →緯度と経度をゲット
+// 全データをスキャン
+  // 駐車場A：距離600m →スルー
+  // 駐車場B：距離300m →採用！
+  // 駐車場C：距離450m →採用！
+// 地図を書き換え（地図を初期化し、BとCだけを表示）
+
+// 絞り込み状態を管理するフラグ
+var isFiltered = false;
+// 現在地の円を管理する変数（削除するため）
+var currentCircle = null;
+
+ //#locate-btnにクリックイベントを追加
+ //→イベント内に位置情報を取得するプログラムを入れる
+
+ //機能させたいボタンのIdを取得する
 var btn = document.getElementById('locate-btn');
 
-//ボタンがクリックされた時の予約
+//ボタンのクリックまち
 btn.addEventListener('click', function() {
-    // ボタンが押されたら、ブラウザに位置情報を聞く
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-});//位置情報が取れたら→関数４　取れなかったら→関数5
+  // 以下ボタンが押された時の処理
+  // 絞り込みONの場合は、全ピンを表示に戻す
+    if (isFiltered) {
+        showAllMarkers(); //→関数６へ
+    } else {
+  // 絞り込みOFFの場合は、位置情報を取得して絞り込み
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback); 
+    }
+});//→クリックされたら、位置情報を取得する。
+// 成功→関数４　失敗→関数5
+
+
 
 //関数４：位置情報がうまく取れた時の処理
 function successCallback(position) {
-    // positionの中には、緯度・経度が入っています
-    var Ido = position.coords.latitude;  // 緯度
-    var Keido = position.coords.longitude; // 経度
+    var Ido = position.coords.latitude;  // ユーザーの緯度
+    var Keido = position.coords.longitude; // ユーザーの経度
     var userPoint= L.latLng(Ido,Keido)//現在地にオブジェクトを作成
 
-    // 500m以内の駐車場を探す処理
+  // 500m以内の駐車場を探す処理ここから。
     var nearPark = allParkingData.features.filter (function(feature){
      if (!feature.geometry || !feature.geometry.coordinates) {
-        return false; 
+        return false;  // 位置情報が見つからないデータについては、今後の処理を無視する（エラー防止）
       }
-      var pKeido = feature.geometry.coordinates[0];
-      var pIdo = feature.geometry.coordinates[1];
-      var parkingPoint = L.latLng(pIdo,pKeido);
+      var pKeido = feature.geometry.coordinates[0];//各駐車場の経度を抽出
+      var pIdo = feature.geometry.coordinates[1];//各駐車場の緯度を抽出
+      var parkingPoint = L.latLng(pIdo,pKeido); //上で出した緯度経度を距離計算可能なオブジェクトとして変数に格納
 
-      var distance = userPoint.distanceTo(parkingPoint);//distanceTo:指定されたベクトル(それぞれの駐車場)からの距離を計算
-      return distance <= 500;
+      var distance = userPoint.distanceTo(parkingPoint);//distanceTo:指定されたベクトル(各駐車場)からの距離を計算
+      return distance <= 500;//500m以内にある駐車場を絞り込んで値を返す
     });
-  var filteredData={
+
+     var filteredData={
     type:"FeatureCollection",
     features: nearPark
-  };
+    };
+
   parkingLayer.clearLayers(); // 一旦シートを真っさらにする
-  addMarkers(filteredData)
-  L.circle([Ido, Keido], { radius: 500 }).addTo(map);
+  addMarkers(filteredData);
+  
+  // 既存の円があれば削除
+  if (currentCircle) {
+    map.removeLayer(currentCircle);
+  }
+  // 現在地の円を表示
+  currentCircle = L.circle([Ido, Keido], { radius: 500 }).addTo(map);
+  
+  // 絞り込み状態をONに設定
+  isFiltered = true;
+  // ボタンのスタイルを変更（クラスを追加）
+  btn.classList.add('filtered');
+  // ボタンのテキストを変更
+  btn.textContent = '絞り込みをやめる';
 };
+
 
 //関数５：エラーが起きた時の処理
 function errorCallback(error) {
-    alert('位置情報が取得できませんでした。設定を確認してください。');
+    alert('位置情報が取得できなかったよ。ごめんね！');
 }
 
-//-------------------------------------------ボタン操作ここまで
+
+//-------------------------------------------駐車場検索ここまで
+
+
+//GeoJsonオブジェクトにおけるtypeの指定方法（個人的メモ）
+//Point　1つの「点」そのもの。
+//Feature　「点」に加えて、「名前」などの属性情報がセットになったもの。
+//FeatureCollection　Feature をたくさん集めた「リスト（箱）」のこと。
+
+//-------------------------------------------表示を元に戻すここから（できたらやる）
+
+//関数６：すべてのピンを表示する処理
+function showAllMarkers() {
+  // 全データを表示
+  parkingLayer.clearLayers();
+  addMarkers(allParkingData);
+  // 現在地の円を削除
+  if (currentCircle) {
+      map.removeLayer(currentCircle);
+      currentCircle = null;
+  }
+  // 絞り込み状態をOFFに設定
+  isFiltered = false;
+  // ボタンのスタイルを元に戻す（クラスを削除）
+  btn.classList.remove('filtered');
+  // ボタンのテキストを元に戻す
+  btn.textContent = '現在地からさがす🔍';
+}
+//-------------------------------------------表示を元に戻すここまで
+
+//-------------------------------------------お気に入りボタンここから（できたら）
+
+//-------------------------------------------お気に入りボタンここまで
