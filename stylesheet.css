@@ -45,10 +45,12 @@ h4{
 	/*以下ポップアップ吹き出しスタイル（書き換えたい部分だけleaflet.cssからコピペ）*/
 	/*吹き出しの中身*/	
 		.popup-content{
-			color:rgb(19, 76, 78)
+			color:rgb(19, 76, 78);
 		}
 		.popup-content p{
 			font-size: 15px;
+			width: 90%;
+			min-width: 200px;
 		}
 		/*吹き出しの下地*/	
 		.leaflet-popup-content-wrapper {
@@ -62,15 +64,15 @@ h4{
 			}
 		/*吹き出しの尖ってるところ*/	
 		.leaflet-popup-tip-container {
-		width: 40px;
-		height: 20px;
-		position: absolute;
-		left: 50%;
-		margin-top: -3.1px;
-		margin-left: -20px;
-		overflow: hidden;
-		pointer-events: none;
-		}
+			width: 40px;
+			height: 20px;
+			position: absolute;
+			left: 50%;
+			margin-top: -3.1px;
+			margin-left: -20px;
+			overflow: hidden;
+			pointer-events: none;
+			}
 		.leaflet-popup-tip {
 			width: 17px;
 			height: 17px;
@@ -96,15 +98,25 @@ h4{
 
 		/*吹き出し内の×ボタンを消去*/
 		.leaflet-container a.leaflet-popup-close-button {
-		display: none;
+			display: none;
 			}
 		.leaflet-container a.leaflet-popup-close-button:hover,
 		.leaflet-container a.leaflet-popup-close-button:focus {
-		display: none;
+			display: none;
 			}
+		/*吹き出し内ゆきちゃん*/
+		.PinPng{
+			position: absolute;
+			bottom: -50px;
+			right: -50px;
+			width: 130px;
+			transform: rotate(10deg);
+		}
+
 	/*吹き出しスタイルここまで*/
 
 
+	/*ボタン用flexBox*/
 	.buttons{
 		position: fixed;
 		width:90%;
@@ -116,7 +128,7 @@ h4{
 		z-index:500;
 	}
 
-	/*位置情報取得＆検索ボタンここから*/
+	/*位置情報取得＆検索ボタン*/
 	#locate-btn{
 		color:rgb(19, 76, 78);
 		background-color: rgb(255, 255, 255);
@@ -129,7 +141,10 @@ h4{
 		background-color:rgb(19, 76, 78) ;
 		color:white;
 	}
-	/*ボタンここまで*/
+	#locate-btn.filtered {
+		background-color: cadetblue;
+		color:white
+	  }
 
 /*地図内スタイルここまで*/
 
@@ -170,6 +185,7 @@ h4{
 	height: 80%;
 	top: 0;
 	left: 0;
+
 }
 .window {
 	width: 80%;
