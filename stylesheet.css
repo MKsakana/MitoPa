@@ -7,7 +7,9 @@
       }
 h4{
 	text-align: center;
-	font-size:18px;
+	font-size:17px;
+	padding-bottom: 13px;
+	border-bottom: 2px solid rgb(126, 151, 152);
 }
 
 
@@ -32,51 +34,87 @@ h4{
 }
 
 /*ここから地図内スタイル*/
-#map{
-    width: 100%;/*地図を横幅いっぱいに*/
-    height: 90%;/*地図を縦幅いっぱいに*/
-    margin-top:0px; /*要素外の上側余白を０に*/
-    padding-top:0px; /*要素内の上側余白を０に*/
-    z-index:0;/*地図のz座標を０に*/
-}
-	/*ポップアップ吹き出しスタイル（leaflet.cssから一部コピペ→編集しています）*/
-		/*吹き出しの中身*/	
-.popup-content{
-	color:rgb(19, 76, 78)
-}
-.popup-content p{
-	font-size: 15px;
-}
+	#map{
+		width: 100%;/*地図を横幅いっぱいに*/
+		height: 90%;/*地図を縦幅いっぱいに*/
+		margin-top:0px; /*要素外の上側余白を０に*/
+		padding-top:0px; /*要素内の上側余白を０に*/
+		z-index:0;/*地図のz座標を０に*/
+	}
+
+	/*以下ポップアップ吹き出しスタイル（書き換えたい部分だけleaflet.cssからコピペ）*/
+	/*吹き出しの中身*/	
+		.popup-content{
+			color:rgb(19, 76, 78)
+		}
+		.popup-content p{
+			font-size: 15px;
+		}
 		/*吹き出しの下地*/	
-.leaflet-popup-content-wrapper {
-	padding: 1px;
-	text-align: left;
-	border-radius: 5px;
-	background-color:  cadetblue;
-	}
+		.leaflet-popup-content-wrapper {
+			padding: 1px;
+			text-align: left;
+			border-radius: 5px;
+			border-bottom-left-radius: 10px;
+			border-bottom-right-radius: 10px;
+			background-color:  cadetblue;
+			border-bottom: 3px solid rgb(19, 76, 78);
+			}
 		/*吹き出しの尖ってるところ*/	
-.leaflet-popup-tip {
-	width: 17px;
-	height: 17px;
-	padding: 1px;
+		.leaflet-popup-tip {
+			width: 17px;
+			height: 17px;
+			padding: 1px;
+			margin: -10px auto 0;
+			pointer-events: auto;
 
-	margin: -10px auto 0;
-	pointer-events: auto;
-
-	-webkit-transform: rotate(45deg);
-	   -moz-transform: rotate(45deg);
-	    -ms-transform: rotate(45deg);
-	        transform: rotate(45deg);
-	}
+			-webkit-transform: rotate(45deg);
+			-moz-transform: rotate(45deg);
+				-ms-transform: rotate(45deg);
+					transform: rotate(45deg);
+			border-bottom: 3px solid rgb(19, 76, 78);
+			border-right: 3px solid rgb(19, 76, 78);
+		
+			}
 		/*吹き出し全体の色指定*/
-.leaflet-popup-content-wrapper,
-.leaflet-popup-tip {
-	background-color:rgb(255, 255, 255);
-	color: #333;
-	box-shadow: 0 0px 3px rgba(0,0,0,0.4);
-	}
+		.leaflet-popup-content-wrapper,
+		.leaflet-popup-tip {
+			background-color:rgb(255, 255, 255);
+			color: #333;
+			box-shadow: 0 0px 3px rgba(0,0,0,0.4);
+			}
 	/*吹き出しスタイルここまで*/
+
+
+	.buttons{
+		position: fixed;
+		width:90%;
+		top:90px;
+		right:20px;
+		display: flex;
+		justify-content: flex-end;  
+		gap: 10px;
+		z-index:500;
+	}
+
+	/*位置情報取得＆検索ボタンここから*/
+	#locate-btn{
+		color:rgb(19, 76, 78);
+		background-color: rgb(255, 255, 255);
+		padding:20px;
+		border: 3px rgba(0,0,0,0.4);
+		border-radius: 5px;
+		border-bottom: 3px solid rgb(19, 76, 78);
+	}
+	#locate-btn:active{
+		background-color:rgb(19, 76, 78) ;
+		color:white;
+	}
+	/*ボタンここまで*/
+
 /*地図内スタイルここまで*/
+
+
 
 /*ポップアップスタイルここから*/
 
@@ -127,6 +165,7 @@ h4{
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	z-index:1000;
 }
 .close {
 	cursor:pointer;
