@@ -112,6 +112,9 @@ h4{
 			width: 130px;
 			transform: rotate(10deg);
 		}
+		.judge{
+		font-size: 30px;
+		}
 
 	/*吹き出しスタイルここまで*/
 
@@ -163,13 +166,12 @@ h4{
 .yuki1{
   max-width: 20%;
   height: auto;
-  float: left; /* 左に浮かせる */
   margin-right: 15px; /* 文章とくっつきすぎないように隙間を作る */
   margin-bottom: 10px;
 }
 
 .open {
-	cursor:pointer; 
+	cursor: pointer;
 }
 #popup{
 	display: none;
@@ -178,14 +180,13 @@ h4{
 	display: flex;
 }
 #popup:checked + .overlay {
-	display: block;
+	display: none;
 	background-color: white;
 	position: fixed;
 	width: 80%;
 	height: 80%;
 	top: 0;
 	left: 0;
-
 }
 .window {
 	width: 80%;
@@ -256,6 +257,11 @@ details[open] summary::after {
 
 .details_content {
   padding: 0 20px 10px;
+  display: flex;  /* ゆきちゃんと文章を横並びにする */
+}
+
+.details_content .yuki1 {
+	flex-shrink: 0;  /* ゆきちゃんの縦横比率を保つ */
 }
 /* 質問　アコーディオンメニュー　ここまで */
 
