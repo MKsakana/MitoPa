@@ -59,8 +59,14 @@ function addMarkers(dataToDisplay) {
         <div class="popup-content">
         <img src="image/yuki1.png" class="PinPng">
           <h4>${props.名前}</h4>
-          <p>初心者おすすめ度:<br> ${props.初心者おす ? props.初心者おす : ""}</p>
-          <p>ひとこと:<br>${props.備考 ? props.備考 : ""}</p>
+          <div class="popup-sub">
+          <div class="popup-subleft">
+          <p>🔰おすすめ度</br><span="judge"> ${props.初心者おす ? props.初心者おす.charAt(0) : ""}</span></p>
+          </div>
+          <div class="popup-subright">
+          <p>ひとこと<br>${props.備考 ? props.備考 : ""}</p>
+          <div>
+          </div>
         </div>
       `);
     }
@@ -74,19 +80,17 @@ function addMarkers(dataToDisplay) {
 
 //-------------------------------------------近くの駐車場検索
 
-//--処理の流れのイメージ--
-// 現在地からさがすボタンをタップ
-// 現在地取得 →緯度と経度をゲット
-// 全データをスキャン
-  // 駐車場A：距離600m →スルー
-  // 駐車場B：距離300m →採用！
-  // 駐車場C：距離450m →採用！
-// 地図を書き換え（地図を初期化し、BとCだけを表示）
+    //--処理の流れのイメージ--
+    // 現在地からさがすボタンをタップ
+    // 現在地取得 →緯度と経度をゲット
+    // 全データをスキャン
+    // 地図を書き換え（地図を初期化して、対象だけを表示）
 
 // 絞り込み状態を管理するフラグ
 var isFiltered = false;
 // 現在地の円を管理する変数（削除するため）
 var currentCircle = null;
+
 
  //#locate-btnにクリックイベントを追加
  //→イベント内に位置情報を取得するプログラムを入れる
@@ -97,6 +101,7 @@ var btn = document.getElementById('locate-btn');
 //ボタンのクリックまち
 btn.addEventListener('click', function() {
   // 以下ボタンが押された時の処理
+  
   // 絞り込みONの場合は、全ピンを表示に戻す
     if (isFiltered) {
         showAllMarkers(); //→関数６へ
@@ -104,7 +109,8 @@ btn.addEventListener('click', function() {
   // 絞り込みOFFの場合は、位置情報を取得して絞り込み
         navigator.geolocation.getCurrentPosition(successCallback, errorCallback); 
     }
-});//→クリックされたら、位置情報を取得する。
+});
+//→クリックされたら、位置情報を取得する。
 // 成功→関数４　失敗→関数5
 
 
@@ -118,7 +124,7 @@ function successCallback(position) {
   // 500m以内の駐車場を探す処理ここから。
     var nearPark = allParkingData.features.filter (function(feature){
      if (!feature.geometry || !feature.geometry.coordinates) {
-        return false;  // 位置情報が見つからないデータについては、今後の処理を無視する（エラー防止）
+        return false;  // 位置情報が見つからないデータについては、以下の処理を無視する（取得エラー防止）
       }
       var pKeido = feature.geometry.coordinates[0];//各駐車場の経度を抽出
       var pIdo = feature.geometry.coordinates[1];//各駐車場の緯度を抽出
@@ -161,12 +167,9 @@ function errorCallback(error) {
 //-------------------------------------------駐車場検索ここまで
 
 
-//GeoJsonオブジェクトにおけるtypeの指定方法（個人的メモ）
-//Point　1つの「点」そのもの。
-//Feature　「点」に加えて、「名前」などの属性情報がセットになったもの。
-//FeatureCollection　Feature をたくさん集めた「リスト（箱）」のこと。
 
-//-------------------------------------------表示を元に戻すここから（できたらやる）
+
+//-------------------------------------------表示を元に戻すここから
 
 //関数６：すべてのピンを表示する処理
 function showAllMarkers() {
@@ -187,6 +190,14 @@ function showAllMarkers() {
 }
 //-------------------------------------------表示を元に戻すここまで
 
+
+
 //-------------------------------------------お気に入りボタンここから（できたら）
 
 //-------------------------------------------お気に入りボタンここまで
+
+
+//GeoJsonオブジェクトにおけるtypeの指定方法（個人的メモ）
+//Point　1つの「点」そのもの。
+//Feature　「点」に加えて、「名前」などの属性情報がセットになったもの。
+//FeatureCollection　Feature をたくさん集めた「リスト（箱）」のこと。
