@@ -56,18 +56,27 @@ function addMarkers(dataToDisplay) {
 
       //駐車場情報を使ってHTMLにポップアップを追加
       layer.bindPopup(`
-        <div class="popup-content">
-        <img src="image/yuki1.png" class="PinPng">
-          <h4>${props.名前}</h4>
-          <div class="popup-sub">
-          <div class="popup-subleft">
-          <p>🔰おすすめ度</br><span="judge"> ${props.初心者おす ? props.初心者おす.charAt(0) : ""}</span></p>
-          </div>
-          <div class="popup-subright">
-          <p>ひとこと<br>${props.備考 ? props.備考 : ""}</p>
-          <div>
-          </div>
-        </div>
+       <div class="popup-content">
+  <img src="image/yuki1.png" class="PinPng">
+  <h4>${props.名前}</h4>
+  
+  <table class="popup-table">
+    <tbody>
+      <tr>
+        <th>🔰おすすめ度</th>
+        <td><span class="judge">${props.初心者おす ? props.初心者おす.charAt(0) : ""}</span></td>
+      </tr>
+      <tr>
+        <th>台数</th>
+        <td>${props.台数}</td>
+      </tr>
+      <tr>
+        <th>備考</th>
+        <td>${props.備考 ? props.備考 : ""}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
       `);
     }
     })
