@@ -104,6 +104,31 @@ h4{
 		.leaflet-container a.leaflet-popup-close-button:focus {
 			display: none;
 			}
+		.popup-table {
+			width: 100%;
+			border-collapse: collapse; 
+			margin-top: 10px;
+  			font-size: 0.9rem;
+		}
+
+		.popup-table th, 
+		.popup-table td {
+			padding: 8px;
+			border-bottom: 1px solid #eee; 
+			text-align: left;
+		}
+	
+		.popup-table th {
+			width: 100px; 
+			background-color: #f9f9f9;
+			color: #666;
+			font-weight: bold;
+			text-align: center;
+}
+		.popup-table td {
+			min-width: 80px;  
+		}
+
 		/*吹き出し内ゆきちゃん*/
 		.PinPng{
 			position: absolute;
@@ -113,7 +138,7 @@ h4{
 			transform: rotate(10deg);
 		}
 		.judge{
-		font-size: 30px;
+		font-weight: bold;
 		}
 
 	/*吹き出しスタイルここまで*/
@@ -148,9 +173,16 @@ h4{
 		background-color: cadetblue;
 		color:white
 	  }
+	.open{
+		color:rgb(19, 76, 78);
+		background-color: rgb(255, 255, 255);
+		padding:20px;
+		border: 3px rgba(0,0,0,0.4);
+		border-radius: 5px;
+		border-bottom: 3px solid rgb(19, 76, 78);
+	}
 
 /*地図内スタイルここまで*/
-
 
 
 /*ポップアップスタイルここから*/
@@ -162,12 +194,17 @@ h4{
   overflow-y: scroll
 }
 
-/* yuki１の大きさ指定 */
-.yuki1{
-  max-width: 20%;
+/* yuki1の大きさ指定 */
+.img-yuki-wrap {
+  width: 20%;
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+.yuki1 {
+  width: 100%;
   height: auto;
-  margin-right: 15px; /* 文章とくっつきすぎないように隙間を作る */
-  margin-bottom: 10px;
+  display: block;
 }
 
 .open {
@@ -177,16 +214,16 @@ h4{
 	display: none;
 }
 .overlay {
-	display: flex;
+	display: none;
 }
 #popup:checked + .overlay {
-	display: none;
-	background-color: white;
+	display: block;
 	position: fixed;
 	width: 80%;
 	height: 80%;
 	top: 0;
 	left: 0;
+	z-index:1000;
 }
 .window {
 	width: 80%;
@@ -201,10 +238,9 @@ h4{
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	z-index:1000;
 }
 .close {
-	cursor:pointer;
+	cursor: pointer;
 	position: absolute;
 	top: 8px;
 	right: 8px;
@@ -258,10 +294,6 @@ details[open] summary::after {
 .details_content {
   padding: 0 20px 10px;
   display: flex;  /* ゆきちゃんと文章を横並びにする */
-}
-
-.details_content .yuki1 {
-	flex-shrink: 0;  /* ゆきちゃんの縦横比率を保つ */
 }
 /* 質問　アコーディオンメニュー　ここまで */
 
