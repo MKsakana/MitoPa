@@ -231,7 +231,7 @@ h4{
 	height: 80%;
 	background-color: white;
 	border-radius: 8px; /* 四角の角を丸くする */
-	padding: 10px;
+	padding: 20px;
 	justify-content: center;
 	align-items: center;
 	position: fixed;
