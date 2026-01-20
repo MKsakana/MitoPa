@@ -1,7 +1,7 @@
  // ------------------------------------------地図表示
 const map = L.map('map', {
   center: [36.3708, 140.4760],
-  zoom: 17,
+  zoom: 18,
   minZoom: 14, 
   maxZoom: 18,
   maxBounds: [
@@ -37,16 +37,16 @@ fetch('geo_test.geojson')
   .then(convertToJson)//　→関数１へ
   .then(processData);//　→関数２へ
 
-//関数１：GEOJSONをJSONに変換
+//【関数１】GEOJSONをJSONに変換
 function convertToJson(res) {
   return res.json();
 }
-//関数２：Jsonを関数に保存して、次の関数へ渡す
+//【関数２】Jsonを関数に保存して、次の関数へ渡す
 function processData(data) {
     allParkingData = data; //データを変数に保存
     addMarkers(data);   // 　→関数３
 }
-//関数３：ピンと吹き出しの設定→表示
+//【関数３】ピンと吹き出しの設定→表示
 function addMarkers(dataToDisplay) {
     parkingLayer.clearLayers(); //シートを真っさらにする
     L.geoJSON(dataToDisplay, {
@@ -124,7 +124,7 @@ btn.addEventListener('click', function() {
 
 
 
-//関数４：位置情報がうまく取れた時の処理
+//【関数４】位置情報がうまく取れた時の処理
 function successCallback(position) {
     var Ido = position.coords.latitude;  // ユーザーの緯度
     var Keido = position.coords.longitude; // ユーザーの経度
@@ -167,7 +167,7 @@ function successCallback(position) {
 };
 
 
-//関数５：エラーが起きた時の処理
+//【関数５】エラーが起きた時の処理
 function errorCallback(error) {
     alert('位置情報が取得できなかったよ。ごめんね！');
 }
@@ -180,7 +180,7 @@ function errorCallback(error) {
 
 //-------------------------------------------表示を元に戻すここから
 
-//関数６：すべてのピンを表示する処理
+//【関数６】すべてのピンを表示する処理
 function showAllMarkers() {
   // 全データを表示
   parkingLayer.clearLayers();
