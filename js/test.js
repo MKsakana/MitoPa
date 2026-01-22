@@ -54,6 +54,8 @@ function addMarkers(dataToDisplay) {
        onEachFeature: function(feature, layer) {
       const props = feature.properties;
 
+
+      
       //駐車場情報を使ってHTMLにポップアップを追加
       layer.bindPopup(`
        <div class="popup-content">
@@ -140,7 +142,7 @@ function successCallback(position) {
       var parkingPoint = L.latLng(pIdo,pKeido); //上で出した緯度経度を距離計算可能なオブジェクトとして変数に格納
 
       var distance = userPoint.distanceTo(parkingPoint);//distanceTo:指定されたベクトル(各駐車場)からの距離を計算
-      return distance <= 500;//500m以内にある駐車場を絞り込んで値を返す
+      return distance <= 300;//500m以内にある駐車場を絞り込んで値を返す
     });
 
      var filteredData={
